@@ -1,0 +1,14 @@
+{
+  "name": "NoMouse",
+  "version": "1.0.1",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "npm run build && npm run deploy && echo 'client built!'"
+  },
+  "author": "Tomaz Rodrigues",
+  "liscense": "MIT"
+}
