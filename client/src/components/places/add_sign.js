@@ -10,8 +10,8 @@ const Add_Sign = (props) => {
         status:
         <select id="new_status" >
           <option value="authorized">Authorized</option>
-          <option value="authorized">Delivered</option>
-          <option value="authorized">Picked up</option>
+          <option value="delivered">Delivered</option>
+          <option value="picked up">Picked up</option>
         </select>
         <br/>
         <input type="submit" />

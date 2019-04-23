@@ -9,7 +9,7 @@ const AddShapes = (props) => {
         Add Shapes
       </button>
       <button onClick={event => place_signs(event)}>
-        Test Geocode
+        Add Signs
       </button>
     </div>
   )

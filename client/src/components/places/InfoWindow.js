@@ -26,23 +26,7 @@ const InfoWindow = (props) => {
       type: 'dark',
     }
   });
-  var snippet = ""
   const { classes } = props;
-  var query = props.topText ;
-  var limit = 3 ;
-  var url = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=${limit}&srsearch=${query}`
-  fetch(url)
-  .then(res => res.json())
-  .then(function(json){
-    if (!!json.query.search[0]){
-      snippet = json.query.search[0].snippet ;
-      console.log(json.query.search[0]) ;
-      let title = json.query.search[0].title ;
-      let learn_link = `https://en.wikipedia.org/wiki/${title.replace(/ /g,"_")}` ;
-      document.getElementById(`learn_more_button_${props.foursquare_id}`).innerHTML = `<a target="_blank" href="${learn_link}">Learn More</a>` ;
-      document.getElementById(`snippet_${props.foursquare_id}`).innerHTML = snippet ;
-    }
-  })
     return (
       <div>
         <MuiThemeProvider theme={theme} >
@@ -54,21 +38,21 @@ const InfoWindow = (props) => {
             />
             <CardContent>
               <Typography gutterBottom variant="headline" component="h2">
-                {props.topText}
+                {props.name}
               </Typography>
               <Typography component="p">
-                address: {props.tagline}
+                address: {props.address}
               </Typography>
-              <Typography component="p" id={`snippet_${props.foursquare_id}`}>
-                Searching...
+              <Typography component="p" >
+                delivery status: {props.status}
               </Typography>
             </CardContent>
             <CardActions>
               <Button size="small" color="secondary">
-                Share
+                Edit (upcoming)
               </Button>
-              <Button size="small" color="secondary" id={`learn_more_button_${props.foursquare_id}`}>
-                Learn More
+              <Button size="small" color="secondary">
+                Destroy (upcoming)
               </Button>
             </CardActions>
           </Card>

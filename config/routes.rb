@@ -21,12 +21,12 @@ Rails.application.routes.draw do
   get '/api/messages/index/:id', to: 'messages#index'
   post '/api/messages/create/:subject/:content/:user_id/:to_id/:conversation_id', to: 'messages#create'
   post '/api/messages/new/:subject/:content/:user_id/:recipient_name', to: 'messages#new'
-  get '/api/signs', to: 'signs#index'
 
+
+  get '/api/signs', to: 'signs#index'
   constraints(lat: /[^\/]+/, lng: /[^\/]+/) do
-  #  post '/api/signs/:lat/:lng/:address/:name', to: 'signs#create'
     post '/api/signs', to: 'signs#create'
-  end 
+  end
 
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do
     !request.xhr? && request.format.html?
