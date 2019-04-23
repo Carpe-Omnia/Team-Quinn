@@ -10,12 +10,12 @@ import Typography from '@material-ui/core/Typography/Typography' ;
 import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 
-
+/*
 const styles = {
   card: {maxWidth: 345,},
   media: {height: 0,paddingTop: '56.25%',},
 };
-
+*/
 const InfoWindow = (props) => {
   const theme = createMuiTheme({
     palette: {
