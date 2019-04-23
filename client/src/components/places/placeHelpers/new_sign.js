@@ -17,7 +17,7 @@ function new_sign(event) {
       console.log(results_location) ;
       name = document.getElementById('new_name').value ;
       address_to_send = address1 ;
-      //send_sign();
+      send_sign();
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }

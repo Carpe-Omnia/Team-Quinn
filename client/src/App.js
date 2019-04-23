@@ -27,7 +27,6 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h4>Team Quinn Sign Tracker</h4>
-          <span className="non_mobile" >press ';' to access hotkeys from within an input </span>
         </header>
         <div className="App-body">
         <Router>
