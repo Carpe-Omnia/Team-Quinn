@@ -1,13 +1,7 @@
 import React from 'react';
 import Hotkey from './Hotkey'
 import GoogleLogin from 'react-google-login' ;
-import FacebookLogin from 'react-facebook-login' ;
-//import InstagramLogin from 'react-instagram-login' ;
 
-/*const responseInstagram = (response) => {
-  console.log("instagram response");
-  console.log(response);
-}*/
 class Login extends React.Component {
   doThing(event){
     event.preventDefault()
@@ -56,21 +50,6 @@ class Login extends React.Component {
           cookiePolicy={'single_host_origin'}
         />
         <br/>
-        {/*
-        <FacebookLogin
-          appId="2251217524945266"
-          autoLoad={false}
-          fields="name,email,picture"
-          callback={this.props.actions.facebookAuth} />
-
-        <br/>
-        <InstagramLogin
-          clientId="b2b0b30d4ef14fd5ac862e59aa2a26e9"
-          buttonText="Login"
-          onSuccess={responseInstagram}
-          onFailure={responseInstagram}
-        />
-      */}
       </div>
 
     )

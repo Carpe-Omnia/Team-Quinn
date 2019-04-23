@@ -4,12 +4,8 @@ import {bindActionCreators} from 'redux';
 import logo from './style/logo.svg';
 import './style/App.css';
 import {  BrowserRouter as Router, Route} from 'react-router-dom';
-
 import * as actions from './actions/orientationActions'
 import NavBar from './components/NavBar';
-
-
-import HomeContainer from './components/home/HomeContainer'
 import PlacesContainer from './components/places/PlacesContainer'
 
 class App extends Component {

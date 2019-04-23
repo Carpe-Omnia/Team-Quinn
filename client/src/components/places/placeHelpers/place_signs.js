@@ -2,6 +2,7 @@ import {actualMap, actualGeo} from '../Places' ;
 import React from 'react'
 import { render } from 'react-dom';
 import InfoWindow from '../InfoWindow' ;
+
 function place_signs(event) {
   event.preventDefault() ;
   let url = '/api/signs' ;

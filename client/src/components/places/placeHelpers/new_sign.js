@@ -1,4 +1,8 @@
 import {actualMap, actualGeo} from '../Places' ;
+import React from 'react'
+import { render } from 'react-dom';
+import InfoWindow from '../InfoWindow' ;
+
 var lat ;
 var lng ;
 var name ;
@@ -47,6 +51,21 @@ function send_sign() {
             map: actualMap,
             position: results_location
         });
+        marker.addListener('click', e => {
+          var infoWindow = new window.google.maps.InfoWindow({
+            content: '<div id="infoWindow" />',
+            position: {lat: e.latLng.lat(), lng: e.latLng.lng()}
+          })
+          infoWindow.addListener('domready', e => {
+            render(<InfoWindow
+              name={name}
+              address={document.getElementById('new_address').value}
+              status={delivery}
+            />,
+            document.getElementById('infoWindow'))
+          })
+          infoWindow.open(actualMap)
+        })
       }
       else {
         alert("there was in issue persisting the address to the database")
