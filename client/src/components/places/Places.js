@@ -21,7 +21,7 @@ class Places extends React.Component {
           options={{
             center: {lat: 40.356821, lng: -74.657421 },
             zoom: 14,
-          /*gestureHandling: 'cooperative'*/
+            gestureHandling: 'cooperative'
           }}
           onMapLoad={map => {
             actualMap = map ;
