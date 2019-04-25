@@ -5,6 +5,8 @@ import InfoWindow from './InfoWindow'
 
 var actualMap ;
 var actualGeo ;
+var signs_array = [] ;
+
 class Places extends React.Component {
   constructor(props){
     super(props);
@@ -37,5 +39,6 @@ class Places extends React.Component {
   }
 }
 
-export default Places
-export {actualMap, actualGeo}
+export default Places ;
+export {actualMap, actualGeo} ;
+export {signs_array} ;

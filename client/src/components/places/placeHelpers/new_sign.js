@@ -2,6 +2,7 @@ import {actualMap, actualGeo} from '../Places' ;
 import React from 'react'
 import { render } from 'react-dom';
 import InfoWindow from '../InfoWindow' ;
+import {signs_array} from '../Places' ;
 
 var lat ;
 var lng ;
@@ -9,7 +10,6 @@ var name ;
 var address_to_send ;
 var results_location ;
 function new_sign(event) {
-
   event.preventDefault() ;
   var address1 = document.getElementById('new_address').value
   var address = `${address1}, Princeton`
@@ -51,6 +51,7 @@ function send_sign() {
             map: actualMap,
             position: results_location
         });
+        signs_array.push(marker);
         marker.addListener('click', e => {
           var infoWindow = new window.google.maps.InfoWindow({
             content: '<div id="infoWindow" />',
@@ -61,6 +62,9 @@ function send_sign() {
               name={name}
               address={document.getElementById('new_address').value}
               status={delivery}
+              id={json.data.sign.id}
+              sign_lat={lat}
+              sign_lng={lng}
             />,
             document.getElementById('infoWindow'))
           })

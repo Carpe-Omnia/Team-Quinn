@@ -2,6 +2,7 @@ import {actualMap, actualGeo} from '../Places' ;
 import React from 'react'
 import { render } from 'react-dom';
 import InfoWindow from '../InfoWindow' ;
+import {signs_array} from '../Places' ;
 
 function place_signs(event) {
   event.preventDefault() ;
@@ -18,6 +19,7 @@ function place_signs(event) {
         position: latlng,
         animation: window.google.maps.Animation.DROP
       })
+      signs_array.push(marker) ;
       marker.addListener('click', e => {
         var infoWindow = new window.google.maps.InfoWindow({
           content: '<div id="infoWindow" />',
@@ -28,6 +30,9 @@ function place_signs(event) {
             name={sign.name}
             address={sign.address}
             status={sign.delivery}
+            sign_id={sign.id}
+            sign_lng={sign.lng}
+            sign_lat={sign.lat}
           />,
           document.getElementById('infoWindow'))
         })
@@ -35,6 +40,7 @@ function place_signs(event) {
       })
     })
   })
+  document.getElementById('reload_signs_button').style.display = "inline" ;
 }
 
 export default place_signs ;

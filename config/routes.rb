@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   constraints(lat: /[^\/]+/, lng: /[^\/]+/) do
     post '/api/signs', to: 'signs#create'
   end
+  post 'api/signs/update', to: 'signs#update'
 
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do
     !request.xhr? && request.format.html?

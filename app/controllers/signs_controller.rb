@@ -25,6 +25,16 @@ class SignsController < ApplicationController
       data: {signs: signs}
     }, status: :ok
   end
+  def update
+    puts params
+    sign = Sign.find_by(id: params[:id])
+    sign.update(sign_params)
+    render json: {
+      status: "success",
+      message: "signs found",
+      data: {sign: sign}
+    }, status: :ok
+  end
   private
 
   def sign_params
