@@ -33,6 +33,10 @@ function send_sign() {
     let status_select = document.getElementById('new_status') ;
     let index = status_select.options.selectedIndex ;
     let delivery = status_select.options[index].value ;
+    let icon = "http://maps.google.com/mapfiles/kml/paddle/"
+    if (index === 0){icon += "red-circle.png"}
+    else if (index === 1){icon += "grn-circle.png"}
+    else{icon += "blu-circle.png"}
     console.log(`delivery status is: ${delivery}`);
 
     var data = {lat: lat, lng: lng, name: name, delivery: delivery, address: address_to_send}
@@ -49,7 +53,8 @@ function send_sign() {
         actualMap.setCenter(results_location);
         var marker = new window.google.maps.Marker({
             map: actualMap,
-            position: results_location
+            position: results_location,
+            icon: icon
         });
         signs_array.push(marker);
         marker.addListener('click', e => {

@@ -12,11 +12,16 @@ function place_signs(event) {
   .then(function(json){
     console.log(json);
     json.data.signs.forEach(function(sign){
+      let icon = "http://maps.google.com/mapfiles/kml/paddle/"
+      if (sign.delivery === "authorized"){icon += "red-circle.png"}
+      else if (sign.delivery === "delivered"){icon += "grn-circle.png"}
+      else{icon += "blu-circle.png"}
       console.log(sign) ;
       let latlng = { lat: parseFloat(sign.lat), lng: parseFloat(sign.lng) }
       let marker = new window.google.maps.Marker({
         map: actualMap,
         position: latlng,
+        icon: icon,
         animation: window.google.maps.Animation.DROP
       })
       signs_array.push(marker) ;
