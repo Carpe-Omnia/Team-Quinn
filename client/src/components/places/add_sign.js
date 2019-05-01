@@ -7,8 +7,8 @@ const Add_Sign = (props) => {
         event.preventDefault();
         props.actions.new_sign();
       }}>
-        Address <input type="text" id="new_address"/><br/>
-        Name <input type="text" id="new_name" /><br/>
+        Address <input type="text" id="new_address" placeholder="full street address" /><br/>
+        Name <input type="text" id="new_name" placeholder="name of owner"/><br/>
         status:
         <select id="new_status" >
           <option value="authorized">Authorized</option>
