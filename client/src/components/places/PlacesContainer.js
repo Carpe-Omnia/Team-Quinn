@@ -1,5 +1,4 @@
 import React from 'react'
-import GetPlaces from './GetPlaces'
 import Places from './Places'
 import AddShapes from './AddShapes'
 import Add_Sign from './add_sign'
@@ -13,7 +12,7 @@ class PlacesContainer extends React.Component {
       <div>
         <Places actions={this.props.actions} orientation={this.props.orientation} z="3" locations={this.props.locations} />
         <AddShapes actions={this.props.actions} />
-        <Add_Sign />
+        <Add_Sign actions={this.props.actions} />
       </div>
     )
   }

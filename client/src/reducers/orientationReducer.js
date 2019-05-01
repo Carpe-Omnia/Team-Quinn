@@ -9,7 +9,8 @@ function orientationReducer(state={
   },
   testing: "",
   locations: [],
-  user: {}
+  user: {},
+  snackbar_message:""
 }, action){
   var newOr = state.orientation ;
   switch(action.type) {
@@ -43,6 +44,8 @@ function orientationReducer(state={
       return Object.assign({}, state, {locations: action.payload.locations})
     case 'SET_USER':
       return Object.assign({}, state, {user: action.payload.user})
+    case 'SET_SNACKBAR_MESSAGE':
+      return Object.assign({}, state, {snackbar_message: action.payload.snackbar_message})
     case 'ADD_JOKE':
       return Object.assign({}, state, {
         all_jokes: [action.payload.joke, ...state.all_jokes],

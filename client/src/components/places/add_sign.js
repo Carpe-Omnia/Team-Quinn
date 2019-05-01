@@ -1,10 +1,12 @@
 import React from 'react'
-import new_sign from './placeHelpers/new_sign' ;
 
 const Add_Sign = (props) => {
   return (
     <div>
-      <form onSubmit={event => new_sign(event)}>
+      <form onSubmit={function(event){
+        event.preventDefault();
+        props.actions.new_sign();
+      }}>
         Address <input type="text" id="new_address"/><br/>
         Name <input type="text" id="new_name" /><br/>
         status:

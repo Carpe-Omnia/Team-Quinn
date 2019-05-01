@@ -7,6 +7,7 @@ import {  BrowserRouter as Router, Route} from 'react-router-dom';
 import * as actions from './actions/orientationActions'
 import NavBar from './components/NavBar';
 import PlacesContainer from './components/places/PlacesContainer'
+import SimpleSnackbar from './components/Snack';
 
 class App extends Component {
   /*
@@ -35,6 +36,7 @@ class App extends Component {
           </React.Fragment >
         </Router >
         </div>
+        <SimpleSnackbar message={this.props.orientation.snackbar_message} />
       </div>
     );
   }

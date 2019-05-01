@@ -1,7 +1,10 @@
 import React from 'react'
-import {actualMap} from '../components/places/Places' ;
 import InfoWindow from '../components/places/InfoWindow' ;
 import { render } from 'react-dom';
+import {actualMap, actualGeo} from '../components/places/Places' ;
+import {signs_array} from '../components/places/Places' ;
+import {facebookAuth, googleAuth, googleAuthFail} from './authActions.js';
+import {place_signs, new_sign} from './signActions';
 
 var get_count = 1 ;
 var iconBase = "http://maps.google.com/mapfiles/kml/paddle/"
@@ -18,6 +21,17 @@ export function move(direction, z){
       payload: {
         direction: direction,
         z: z
+      }
+    }
+  )
+}
+
+export function set_snackbar_message(message){
+  return (
+    {
+      type: 'SET_SNACKBAR_MESSAGE',
+      payload: {
+        snackbar_message: message
       }
     }
   )
@@ -178,74 +192,5 @@ export function get_places(){
 
 
 
-export const facebookAuth = (response) => {
-  console.log(response) ;
-  var email = response.email ;
-  var name = response.name.replace(" ", "_")
-  var link = `/api/users/auth/facebook/${name}/${email}` ;
-  return (dispatch) => {
-    fetch(link, {
-      method: 'POST'
-    })
-    .then(res => res.json())
-    .then(function(json){
-      console.log(json);
-      if (json.message === "logged in"){
-        localStorage.setItem("username", json.data.name);
-        localStorage.setItem("email", json.data.email);
-        localStorage.setItem("id", json.data.id);
-        dispatch({
-          type: 'SET_USER',
-          payload: {
-            user: {
-              email: json.data.email,
-              name: json.data.name,
-              id: json.data.id
-            }
-          }
-        })
-      }
-      else {
-        alert("something went terribly wrong. Try again, or don't. See what I care")
-      }
-    })
-  }
-}
-
-export const googleAuth = (response) => {
-  var email = response.w3.U3 ;
-  var name = response.w3.ig.replace(" ", "_") ;
-  var link = `/api/users/auth/facebook/${name}/${email}` ;
-  return (dispatch) => {
-    fetch(link, {
-      method: 'POST'
-    })
-    .then(res => res.json())
-    .then(function(json){
-      console.log(json);
-      if (json.message === "logged in"){
-        localStorage.setItem("username", json.data.name);
-        localStorage.setItem("email", json.data.email);
-        localStorage.setItem("id", json.data.id);
-        dispatch({
-          type: 'SET_USER',
-          payload: {
-            user: {
-              email: json.data.email,
-              name: json.data.name,
-              id: json.data.id
-            }
-          }
-        })
-        document.getElementById('navlink1').click()
-      }
-      else {
-        alert("something went terribly wrong. Try again, or don't. See what I care")
-      }
-    })
-  }
-}
-
-export const googleAuthFail = (response) => {
-  console.log(response) ;
-}
+export {facebookAuth, googleAuth, googleAuthFail} ;
+export {place_signs, new_sign} ;
