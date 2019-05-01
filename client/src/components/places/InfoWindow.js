@@ -9,7 +9,10 @@ import Button from '@material-ui/core/Button/Button';
 import Typography from '@material-ui/core/Typography/Typography' ;
 import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
-import {actualMap, actualGeo} from './Places' ;
+import {actualGeo} from './Places' ;
+import {set_snackbar_message} from '../../actions/orientationActions' ;
+import PlacesContainer from './PlacesContainer' ;
+
 /*
 const styles = {
   card: {maxWidth: 345,},
@@ -66,12 +69,12 @@ const InfoWindow = (props) => {
     .then(res => res.json())
     .then(function(json){
       console.log(json.data.sign);
-      alert("reload page to see changes");
+      document.getElementById('snackbar_info_message').innerHTML = 'reload page to see changes' ;
+      document.getElementById('show_snackbar_info').click();
     })
   }
   function make_update_form(){
     console.log("updating Sign") ;
-    let oldhtml = document.getElementById(`edit_button_for_sign_${props.sign_id}`) ;
     document.getElementById(`edit_button_for_sign_${props.sign_id}`).innerHTML = edit_form(props.name, props.address, props.status, props.sign_id) ;
     let status_index = 0
     if (props.status === "authorized"){status_index = 0}
@@ -89,10 +92,12 @@ const InfoWindow = (props) => {
             send_lat = results[0].geometry.location.lat() ;
             send_lng = results[0].geometry.location.lng() ;
             update_sign() ;
-            alert('You have changed the address of a sign. Please refresh the page to see the new position') ;
+            document.getElementById('snackbar_info_message').innerHTML = 'You have changed the address of a sign. Please refresh the page to see the new position' ;
+            document.getElementById('show_snackbar_info').click();
           }
           else {
-            alert('Geocode was not successful for the following reason: ' + status)
+            document.getElementById('snackbar_error_message').innerHTML = 'New geocode was not successful for the following reason: ' + status
+            document.getElementById('show_snackbar_error').click();
           }
         })
       }

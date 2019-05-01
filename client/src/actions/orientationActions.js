@@ -27,14 +27,12 @@ export function move(direction, z){
 }
 
 export function set_snackbar_message(message){
-  return (
-    {
+  return(dispatch) => {
+    dispatch({
       type: 'SET_SNACKBAR_MESSAGE',
-      payload: {
-        snackbar_message: message
-      }
-    }
-  )
+      payload: {snackbar_message: message }
+    })
+  }
 }
 
 export function home(){

@@ -8,7 +8,9 @@ import * as actions from './actions/orientationActions'
 import NavBar from './components/NavBar';
 import PlacesContainer from './components/places/PlacesContainer'
 import SimpleSnackbar from './components/Snack';
-
+import { SnackbarProvider } from 'notistack';
+import SnackDemo1 from './components/Snackbar2' ;
+import {SnackbarMessages} from './components/Snackbar2'
 class App extends Component {
   /*
   constructor(props){
@@ -36,7 +38,11 @@ class App extends Component {
           </React.Fragment >
         </Router >
         </div>
+        <SnackbarMessages />
         <SimpleSnackbar message={this.props.orientation.snackbar_message} />
+        <SnackbarProvider maxSnack={3}>
+          <SnackDemo1 />
+        </SnackbarProvider>
       </div>
     );
   }

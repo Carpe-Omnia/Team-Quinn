@@ -21,7 +21,8 @@ export function place_signs(){
         type: 'SET_SNACKBAR_MESSAGE',
         payload: {snackbar_message: "signs loaded"}
       })
-      document.getElementById('activate_snackbar').click();
+      document.getElementById('snackbar_info_message').innerHTML = "signs loaded" ;
+      document.getElementById('show_snackbar_info').click();
       json.data.signs.forEach(function(sign){
         let icon = "http://maps.google.com/mapfiles/kml/paddle/"
         if (sign.delivery === "authorized"){icon += "red-circle.png"}
@@ -119,8 +120,12 @@ export function new_sign(){
                 })
                 infoWindow.open(actualMap)
               })
+              document.getElementById('snackbar_success_message').innerHTML = "Sign added succesfully" ;
+              document.getElementById('show_snackbar_success').click() ;
             }
             else {
+              document.getElementById('snackbar_error_message').innerHTML = "there was in issue persisting the address to the database" ;
+              document.getElementById('show_snackbar_error').click();
               dispatch({
                 type: 'SET_SNACKBAR_MESSAGE',
                 payload: {snackbar_message: "there was in issue persisting the address to the database" + status}
@@ -129,19 +134,23 @@ export function new_sign(){
           })
         }
         else {
+          document.getElementById('snackbar_warning_message').innerHTML = "please fill out both address and name"
+          document.getElementById('show_snackbar_warning').click();
           dispatch({
             type: 'SET_SNACKBAR_MESSAGE',
-            payload: {snackbar_message: "please fill out both address and name" + status}
+            payload: {snackbar_message: "please fill out both address and name"}
           })
         }
 
       } else {
+        document.getElementById('snackbar_error_message').innerHTML = 'Geocode was not successful for the following reason: ' + status ;
+        document.getElementById('show_snackbar_error').click();
         dispatch({
           type: 'SET_SNACKBAR_MESSAGE',
           payload: {snackbar_message: 'Geocode was not successful for the following reason: ' + status}
         })
       }
     });
-    document.getElementById('activate_snackbar').click();
+    //document.getElementById('activate_snackbar').click();
   }
 }
