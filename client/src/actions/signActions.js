@@ -56,7 +56,8 @@ export function place_signs(){
           infoWindow.open(actualMap)
         })
       })
-      document.getElementById('reload_signs_button').style.display = "inline" ;
+      document.getElementById('reload_signs_map_button').style.display = "block" ;
+      document.getElementById('show_signs_map_button').style.display = "none" ;
     })
   }
 }

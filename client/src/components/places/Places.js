@@ -1,7 +1,8 @@
 import React from 'react'
 import Map from './Map'
-
-
+import ShowShapes from './placeHelpers/show_shapes_button' ;
+import ShowSigns from './placeHelpers/show_signs_button' ;
+import ReloadSigns from './placeHelpers/reload_signs_button' ;
 var actualMap ;
 var actualGeo ;
 var signs_array = [] ;
@@ -30,6 +31,18 @@ class Places extends React.Component {
               var longitude = event.latLng.lng();
               console.log(`{ lat: ${latitude}, lng: ${longitude} },`);
             })
+            var showShapesDiv = document.createElement('div');
+            var showShapes = new ShowShapes(showShapesDiv, map);
+            showShapesDiv.index = 1;
+            var showSignsDiv = document.createElement('div');
+            var showSigns = new ShowSigns(showSignsDiv, map);
+            showSignsDiv.index = 1;
+            var reloadSignsDiv = document.createElement('div');
+            var reloadSigns = new ReloadSigns(showSignsDiv, map);
+            reloadSignsDiv.index = 1;
+            map.controls[window.google.maps.ControlPosition.BOTTOM_LEFT].push(showShapesDiv);
+            map.controls[window.google.maps.ControlPosition.BOTTOM_LEFT].push(showSignsDiv);
+            map.controls[window.google.maps.ControlPosition.BOTTOM_CENTER].push(reloadSignsDiv);
           }}
         />
         </div>
