@@ -1,0 +1,25 @@
+#map {
+  margin: 0 auto ;
+  width: 70% !important;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+@media screen and (max-width: 450px){
+  #map {
+    width: 90% !important;
+    height: 400px !important;
+  }
+}
+@media screen and (max-width: 400px){
+  #map {
+    width: 90% !important;
+    height: 350px !important;
+  }
+}
+@media screen and (max-width: 350px){
+  #map {
+    width: 100% !important;
+    height: 300px !important;
+  }
+}

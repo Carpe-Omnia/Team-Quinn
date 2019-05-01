@@ -1,8 +1,8 @@
 import React from 'react'
 import InfoWindow from '../components/places/InfoWindow' ;
 import { render } from 'react-dom';
-import {actualMap, actualGeo} from '../components/places/Places' ;
-import {signs_array} from '../components/places/Places' ;
+import {actualMap} from '../components/places/Places' ;
+//import {signs_array} from '../components/places/Places' ;
 import {facebookAuth, googleAuth, googleAuthFail} from './authActions.js';
 import {place_signs, new_sign} from './signActions';
 

@@ -1,17 +1,16 @@
 import React from 'react';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import { withStyles } from '@material-ui/core/styles/withStyles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent' ;
-import CardMedia  from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button/Button';
 import Typography from '@material-ui/core/Typography/Typography' ;
+//import { withStyles } from '@material-ui/core/styles/withStyles';
+//import CardMedia  from '@material-ui/core/CardMedia';
 import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import {actualGeo} from './Places' ;
-import {set_snackbar_message} from '../../actions/orientationActions' ;
-import PlacesContainer from './PlacesContainer' ;
+
 
 /*
 const styles = {
@@ -48,7 +47,7 @@ const InfoWindow = (props) => {
 
   let send_lat = props.sign_lat ;
   let send_lng = props.sign_lng ;
-  let send_address = props.address ;
+  //let send_address = props.address ;
   function update_sign(){
     let url = `api/signs/update` ;
     let status_select = document.getElementById(`sign_${props.sign_id}_status`) ;
@@ -109,12 +108,11 @@ const InfoWindow = (props) => {
       }
     })
   }
-  const { classes } = props;
+  //const { classes } = props;
     return (
       <div>
         <MuiThemeProvider theme={theme} >
           <Card className="card" id={`card_for_sign_${props.sign_id}`}>
-
             {/*<CardMedia
               className="card-media"
               image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Bosphorus.jpg/397px-Bosphorus.jpg"

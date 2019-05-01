@@ -4,7 +4,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 60s linear;
-  height: 10vmin;
+  height: 8vmin;
   pointer-events: none;
   display: inline ;
   position: absolute ;
@@ -18,8 +18,8 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 20vh;
-  max-height: 30vh;
+  min-height: 10vh;
+  max-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +35,7 @@
 .App-body {
   color: white ;
   position: relative ;
-  top: 20vh ;
+  top: 10vh ;
   /*z-index: -1 ;*/
 }
 .App-link {
@@ -143,9 +143,7 @@
     background-image: url("./vertical3small.jpg") ;
   }
 }
-#map {
-  margin: 0 auto
-}
+
 @media screen and (max-width: 1100px){
   #featured_content_today {
     width: 70% ;
@@ -167,11 +165,6 @@
     padding: 6px !important ;
     margin: 0px 3px 3px !important ;
   }
-  #map {
-    width: 350px !important;
-    height: 350px !important;
-  }
-
 }
 @media screen and (max-width: 350px){
   .navlink {
@@ -179,10 +172,6 @@
     width: 50px !important;
     padding: 3px !important ;
     margin: 0px 2px 2px !important ;
-  }
-  #map {
-    width: 300px !important;
-    height: 300px !important;
   }
 }
 .content_moving_Right {

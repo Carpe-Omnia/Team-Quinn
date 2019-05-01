@@ -1,7 +1,7 @@
 import React from 'react'
 import add_shapes from './placeHelpers/place_shapes' ;
 import reload_signs from './placeHelpers/reload_signs' ;
-import {actualMap, signs_array} from './Places' ;
+//import {actualMap, signs_array} from './Places' ;
 
 const AddShapes = (props) => {
   return(

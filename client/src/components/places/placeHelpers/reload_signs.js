@@ -1,4 +1,4 @@
-import {actualMap, signs_array} from '../Places' ;
+import {signs_array} from '../Places' ;
 
 function reload_signs(event){
   event.preventDefault() ;
