@@ -3,14 +3,12 @@ import Map from './Map'
 import ShowShapes from './placeHelpers/show_shapes_button' ;
 import ShowSigns from './placeHelpers/show_signs_button' ;
 import ReloadSigns from './placeHelpers/reload_signs_button' ;
+import AddSign from './placeHelpers/new_sign_button' ;
 var actualMap ;
 var actualGeo ;
 var signs_array = [] ;
 
 class Places extends React.Component {
-  constructor(props){
-    super(props);
-  }
   render(){
     return (
       <div id="places">
@@ -40,9 +38,13 @@ class Places extends React.Component {
             var reloadSignsDiv = document.createElement('div');
             var reloadSigns = new ReloadSigns(showSignsDiv, map);
             reloadSignsDiv.index = 1;
+            var addSignDiv = document.createElement('div');
+            var addSign = new AddSign(addSignDiv, map);
+            addSignDiv.index = 1;
             map.controls[window.google.maps.ControlPosition.BOTTOM_LEFT].push(showShapesDiv);
             map.controls[window.google.maps.ControlPosition.BOTTOM_LEFT].push(showSignsDiv);
             map.controls[window.google.maps.ControlPosition.BOTTOM_CENTER].push(reloadSignsDiv);
+            map.controls[window.google.maps.ControlPosition.BOTTOM_CENTER].push(addSignDiv);
           }}
         />
         </div>
