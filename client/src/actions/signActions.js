@@ -16,7 +16,6 @@ export function place_signs(){
     fetch(url)
     .then(res => res.json())
     .then(function(json){
-      console.log(json);
       dispatch({
         type: 'SET_SNACKBAR_MESSAGE',
         payload: {snackbar_message: "signs loaded"}
@@ -28,7 +27,6 @@ export function place_signs(){
         if (sign.delivery === "authorized"){icon += "red-circle.png"}
         else if (sign.delivery === "delivered"){icon += "grn-circle.png"}
         else{icon += "blu-circle.png"}
-        console.log(sign) ;
         let latlng = { lat: parseFloat(sign.lat), lng: parseFloat(sign.lng) }
         let marker = new window.google.maps.Marker({
           map: actualMap,
@@ -64,27 +62,21 @@ export function place_signs(){
 
 export function new_sign(new_address, new_name, new_status){
   return(dispatch) => {
-    var address1 = new_address
-    var address = `${address1}, Princeton`
-    actualGeo.geocode( { 'address': address1}, function(results, status) {
-      if (status === 'OK') {
-        lat = results[0].geometry.location.lat() ;
-        lng = results[0].geometry.location.lng() ;
-        results_location = results[0].geometry.location ;
-        console.log(results_location) ;
-        name = new_name ;
-        address_to_send = address1 ;
-        if (!!name && address_to_send){
+    if (!!new_name && !!new_address){
+      actualGeo.geocode( { 'address': new_address}, function(results, status) {
+        if (status === 'OK') {
+          lat = results[0].geometry.location.lat() ;
+          lng = results[0].geometry.location.lng() ;
+          results_location = results[0].geometry.location ;
+          name = new_name ;
+          address_to_send = new_address;
           var url = `api/signs`
           let delivery = new_status
           let icon = "http://maps.google.com/mapfiles/kml/paddle/"
           if (delivery === 'authorized'){icon += "red-circle.png"}
           else if (delivery === 'delivered'){icon += "grn-circle.png"}
           else{icon += "blu-circle.png"}
-          console.log(`delivery status is: ${delivery}`);
-
           var data = {lat: lat, lng: lng, name: name, delivery: delivery, address: address_to_send}
-
           fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -92,64 +84,50 @@ export function new_sign(new_address, new_name, new_status){
           })
           .then(results => results.json())
           .then(function(json){
-            console.log(json) ;
             if (json.status === "success"){
-              actualMap.setCenter(results_location);
-              var marker = new window.google.maps.Marker({
-                  map: actualMap,
-                  position: results_location,
-                  icon: icon
-              });
-              signs_array.push(marker);
-              marker.addListener('click', e => {
-                var infoWindow = new window.google.maps.InfoWindow({
-                  content: '<div id="infoWindow" />',
-                  position: {lat: e.latLng.lat(), lng: e.latLng.lng()}
+                actualMap.setCenter(results_location);
+                var marker = new window.google.maps.Marker({
+                    map: actualMap,
+                    position: results_location,
+                    icon: icon
+                });
+                signs_array.push(marker);
+                marker.addListener('click', e => {
+                  var infoWindow = new window.google.maps.InfoWindow({
+                    content: '<div id="infoWindow" />',
+                    position: {lat: e.latLng.lat(), lng: e.latLng.lng()}
+                  })
+                  infoWindow.addListener('domready', e => {
+                    render(<InfoWindow
+                      name={name}
+                      address={new_address}
+                      status={delivery}
+                      id={json.data.sign.id}
+                      sign_lat={lat}
+                      sign_lng={lng}
+                    />,
+                    document.getElementById('infoWindow'))
+                  })
+                  infoWindow.open(actualMap)
                 })
-                infoWindow.addListener('domready', e => {
-                  render(<InfoWindow
-                    name={name}
-                    address={new_address}
-                    status={delivery}
-                    id={json.data.sign.id}
-                    sign_lat={lat}
-                    sign_lng={lng}
-                  />,
-                  document.getElementById('infoWindow'))
-                })
-                infoWindow.open(actualMap)
-              })
-              document.getElementById('snackbar_success_message').innerHTML = "Sign added succesfully" ;
-              document.getElementById('show_snackbar_success').click() ;
-            }
+                document.getElementById('snackbar_success_message').innerHTML = "Sign added succesfully" ;
+                document.getElementById('show_snackbar_success').click() ;
+              }
             else {
-              document.getElementById('snackbar_error_message').innerHTML = "there was in issue persisting the address to the database" ;
-              document.getElementById('show_snackbar_error').click();
-              dispatch({
-                type: 'SET_SNACKBAR_MESSAGE',
-                payload: {snackbar_message: "there was in issue persisting the address to the database" + status}
-              })
-            }
+                document.getElementById('snackbar_error_message').innerHTML = "there was in issue persisting the address to the database" ;
+                document.getElementById('show_snackbar_error').click();
+              }
           })
         }
         else {
-          document.getElementById('snackbar_warning_message').innerHTML = "please fill out both address and name"
-          document.getElementById('show_snackbar_warning').click();
-          dispatch({
-            type: 'SET_SNACKBAR_MESSAGE',
-            payload: {snackbar_message: "please fill out both address and name"}
-          })
+          document.getElementById('snackbar_error_message').innerHTML = 'Geocode was not successful for the following reason: ' + status ;
+          document.getElementById('show_snackbar_error').click();
         }
-
-      } else {
-        document.getElementById('snackbar_error_message').innerHTML = 'Geocode was not successful for the following reason: ' + status ;
-        document.getElementById('show_snackbar_error').click();
-        dispatch({
-          type: 'SET_SNACKBAR_MESSAGE',
-          payload: {snackbar_message: 'Geocode was not successful for the following reason: ' + status}
-        })
-      }
-    });
-    //document.getElementById('activate_snackbar').click();
+      })
+    }
+    else {
+      document.getElementById('snackbar_warning_message').innerHTML = "please fill out both address and name"
+      document.getElementById('show_snackbar_warning').click();
+    }
   }
 }

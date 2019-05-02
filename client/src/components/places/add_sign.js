@@ -8,24 +8,28 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-
+var autocomplete ;
 class AddSign extends React.Component {
   state = {open: false, status: "authorized"};
   handleClickOpen = () => {
     this.setState({ open: true }) ;
     setTimeout(() =>{
-      var autocomplete = new window.google.maps.places.Autocomplete(
-        document.getElementById('new_address'), {types: ['geocode']});
+      autocomplete = new window.google.maps.places.Autocomplete(
+        document.getElementById('new_address'), {
+          types: ['geocode'],
+          location: {lat: 40.356821, lng: -74.657421 },
+          radius: 10000
+        });
       autocomplete.setFields(['address_component']);
-      /*
-      var circle = new window.google.maps.Circle({
-        center: {lat: 40.356821, lng: -74.657421 }, radius: 1000
-      })
-      autocomplete.setBounds(circle.getBounds());
-      */
+      console.log(autocomplete) ;
     }, 1000) ;
   };
-  handleClose = () => {this.setState({ open: false }) };
+  handleClose = () => {
+    autocomplete = null ;
+    this.setState({ open: false }) ;
+    let element = document.getElementsByClassName('pac-container')[0] ;
+    if (!!element){element.parentNode.removeChild(element)} ;
+  };
   handleChange = (event) => {
     this.setState({status: event.target.value});
   };
@@ -34,6 +38,8 @@ class AddSign extends React.Component {
     let address = document.getElementById('new_address').value ;
     this.props.actions.new_sign(address, name, this.state.status);
     this.setState({ open: false })
+    let element = document.getElementsByClassName('pac-container')[0] ;
+    if (!!element){element.parentNode.removeChild(element)} ;
   }
   render() {
     return (

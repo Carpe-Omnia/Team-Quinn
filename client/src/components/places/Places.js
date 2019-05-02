@@ -24,9 +24,6 @@ class Places extends React.Component {
           onMapLoad={map => {
             actualMap = map ;
             actualGeo = new window.google.maps.Geocoder() ;
-            //var autocomplete = new window.google.maps.places.Autocomplete(
-              //document.getElementById('new_address'), {types: ['geocode']});
-            //autocomplete.setFields(['address_component']);
             window.google.maps.event.addListener(map, "click", function(event){
               var latitude = event.latLng.lat();
               var longitude = event.latLng.lng();
