@@ -20,8 +20,6 @@ export function place_signs(){
         type: 'SET_SNACKBAR_MESSAGE',
         payload: {snackbar_message: "signs loaded"}
       })
-      document.getElementById('snackbar_info_message').innerHTML = "signs loaded" ;
-      document.getElementById('show_snackbar_info').click();
       json.data.signs.forEach(function(sign){
         let icon = "http://maps.google.com/mapfiles/kml/paddle/"
         if (sign.delivery === "authorized"){icon += "red-circle.png"}
@@ -54,6 +52,8 @@ export function place_signs(){
           infoWindow.open(actualMap)
         })
       })
+      document.getElementById('snackbar_success_message').innerHTML = "signs loaded" ;
+      document.getElementById('show_snackbar_success').click(); 
       document.getElementById('reload_signs_map_button').style.display = "block" ;
       document.getElementById('show_signs_map_button').style.display = "none" ;
     })
