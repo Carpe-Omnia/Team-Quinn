@@ -13,7 +13,7 @@ class Map extends Component {
   componentDidMount() {
     if(!window.google){
       const s = document.createElement("script");
-      s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzvrsKvl_NoIttnyQINaC2EUoPkdXifcE";
+      s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzvrsKvl_NoIttnyQINaC2EUoPkdXifcE&libraries=places";
       s.async = true;
       var x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);

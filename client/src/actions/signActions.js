@@ -66,7 +66,7 @@ export function new_sign(new_address, new_name, new_status){
   return(dispatch) => {
     var address1 = new_address
     var address = `${address1}, Princeton`
-    actualGeo.geocode( { 'address': address}, function(results, status) {
+    actualGeo.geocode( { 'address': address1}, function(results, status) {
       if (status === 'OK') {
         lat = results[0].geometry.location.lat() ;
         lng = results[0].geometry.location.lng() ;

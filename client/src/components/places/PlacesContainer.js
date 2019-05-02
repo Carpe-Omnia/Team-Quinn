@@ -11,6 +11,7 @@ class PlacesContainer extends React.Component {
         <Places actions={this.props.actions} orientation={this.props.orientation} z="3" locations={this.props.locations} />
         <AddShapes actions={this.props.actions} />
         <AddSign actions={this.props.actions} />
+        <input id="testing_input" type="text" />
       </div>
     )
   }

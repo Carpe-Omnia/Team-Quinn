@@ -7,26 +7,34 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 class AddSign extends React.Component {
-  state = {open: false, status: "other"};
-  handleClickOpen = () => {this.setState({ open: true }) };
-  handleCancel = () => {  this.setState({ open: false }) };
-  handleClose = () => {
-    let name = document.getElementById('new_name').value ;
-    console.log(name)
-    let address = document.getElementById('new_address').value ;
-    console.log(address)
-    this.props.actions.new_sign(address, name, this.state.status);
-    console.log(this.props);
-    this.setState({ open: false }) ;
+  state = {open: false, status: "authorized"};
+  handleClickOpen = () => {
+    this.setState({ open: true }) ;
+    setTimeout(() =>{
+      var autocomplete = new window.google.maps.places.Autocomplete(
+        document.getElementById('new_address'), {types: ['geocode']});
+      autocomplete.setFields(['address_component']);
+      /*
+      var circle = new window.google.maps.Circle({
+        center: {lat: 40.356821, lng: -74.657421 }, radius: 1000
+      })
+      autocomplete.setBounds(circle.getBounds());
+      */
+    }, 1000) ;
   };
+  handleClose = () => {this.setState({ open: false }) };
   handleChange = (event) => {
-    console.log(event.target.value);
     this.setState({status: event.target.value});
   };
+  handleSubmit = () => {
+    let name = document.getElementById('new_name').value ;
+    let address = document.getElementById('new_address').value ;
+    this.props.actions.new_sign(address, name, this.state.status);
+    this.setState({ open: false })
+  }
   render() {
     return (
       <div>
@@ -74,10 +82,10 @@ class AddSign extends React.Component {
           </Select>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleCancel} color="primary">
+            <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleSubmit} color="primary">
               Submit
             </Button>
           </DialogActions>

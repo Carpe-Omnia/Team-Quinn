@@ -24,12 +24,15 @@ class Places extends React.Component {
           onMapLoad={map => {
             actualMap = map ;
             actualGeo = new window.google.maps.Geocoder() ;
+            //var autocomplete = new window.google.maps.places.Autocomplete(
+              //document.getElementById('new_address'), {types: ['geocode']});
+            //autocomplete.setFields(['address_component']);
             window.google.maps.event.addListener(map, "click", function(event){
               var latitude = event.latLng.lat();
               var longitude = event.latLng.lng();
               console.log(`{ lat: ${latitude}, lng: ${longitude} },`);
-            })
-            var showShapesDiv = document.createElement('div');
+            }) /* tool used for finding coordinates when making shapes */
+            var showShapesDiv = document.createElement('div'); /*start of adding custom buttons */
             var showShapes = new ShowShapes(showShapesDiv, map);
             showShapesDiv.index = 1;
             var showSignsDiv = document.createElement('div');
@@ -45,6 +48,7 @@ class Places extends React.Component {
             map.controls[window.google.maps.ControlPosition.BOTTOM_LEFT].push(showSignsDiv);
             map.controls[window.google.maps.ControlPosition.BOTTOM_CENTER].push(reloadSignsDiv);
             map.controls[window.google.maps.ControlPosition.BOTTOM_CENTER].push(addSignDiv);
+            /* end of custom buttons */
           }}
         />
         </div>
