@@ -18,6 +18,7 @@ function ShowShapes(controlDiv, map){
   controlText.style.lineHeight = '30px';
   controlText.style.paddingLeft = '5px';
   controlText.style.paddingRight = '5px';
+  controlText.id = 'show_shapes_map_button' ;
   controlText.innerHTML = grid_on ;
   controlUI.appendChild(controlText);
 

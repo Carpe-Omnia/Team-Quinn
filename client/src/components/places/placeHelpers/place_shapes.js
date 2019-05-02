@@ -1,4 +1,7 @@
 import {actualMap} from '../Places' ;
+import {grid_on, grid_off} from '../../icons/icons' ;
+var shapes_on_map = false ;
+var shapes = [] ;
 function make_shape(paths, color){
   return(
     new window.google.maps.Polygon({
@@ -12,8 +15,7 @@ function make_shape(paths, color){
   )
 }
 
-function add_shapes(event){
-  event.preventDefault() ;
+function add_shapes(){
   var shape1Coords = [
     { lat: 40.32452758963425, lng: -74.69490697941404 },
     { lat: 40.30279915029845, lng: -74.68864133915525 },
@@ -407,12 +409,30 @@ function add_shapes(event){
   ]
   var shape22 = make_shape(shape22Coords, '#FAEBD7')
 
-  var shapes = [
+  shapes = [
     shape1, shape2, shape3, shape4, shape5, shape6, shape7, shape8, shape9, shape10, shape11,
     shape12, shape13, shape14, shape15, shape16, shape17, shape18, shape19, shape20, shape21, shape22
   ];
   shapes.forEach(function(shape){
     shape.setMap(actualMap)
   })
+  shapes_on_map = true ;
+  document.getElementById('show_shapes_map_button').innerHTML = grid_off ;
 }
-export default add_shapes ;
+function toggle_shapes(event){
+  event.preventDefault();
+  if (shapes_on_map){
+    console.log('removing shapes');
+    shapes.forEach(function(shape){
+      shape.setMap(null);
+      shape = null ;
+    })
+    shapes.length = 0 ;
+    shapes_on_map = false ;
+    document.getElementById('show_shapes_map_button').innerHTML = grid_on ;
+  }
+  else {
+    add_shapes();
+  }
+}
+export default toggle_shapes ;
