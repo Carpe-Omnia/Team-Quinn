@@ -19,20 +19,20 @@ const styles = {
 };
 */
 function destroy_sign(sign_id){
-  let url = `api/signs/delete/${sign_id}`
-  fetch(url, {method: 'POST'})
-  .then(res => res.json())
-  .then(function(json){
-    console.log(json);
-    if (json.message === "sign destroyed"){
-      document.getElementById('snackbar_success_message').innerHTML = 'sign destroyed' ;
-      document.getElementById('show_snackbar_success').click() ;
-      document.getElementsByClassName('gm-ui-hover-effect')[0].click() ;
-      //the line above this is almost guaranteed to be a source of bugs in the future.
-      //keep a close eye on it.
-      document.getElementById('reload_signs_button').click() ;
-    }
-  })
+    let url = `api/signs/delete/${sign_id}`
+    fetch(url, {method: 'POST'})
+    .then(res => res.json())
+    .then(function(json){
+      console.log(json);
+      if (json.message === "sign destroyed"){
+        document.getElementById('snackbar_success_message').innerHTML = 'sign destroyed' ;
+        document.getElementById('show_snackbar_success').click() ;
+        document.getElementsByClassName('gm-ui-hover-effect')[0].click() ;
+        //the line above this is almost guaranteed to be a source of bugs in the future.
+        //keep a close eye on it.
+        document.getElementById('reload_signs_button').click() ;
+      }
+    })
 }
 function edit_form(name, address, status, sign_id){
   return(
@@ -149,7 +149,7 @@ const InfoWindow = (props) => {
                 <span style={{display: "none"}} id={`update_button_for_sign_${props.sign_id}`}> Update </span>
               </Button>
               <Button size="small" color="secondary" >
-                <span onClick={event => destroy_sign(props.sign_id)}> Destroy (beta) </span>
+                <span onClick={() => {if(window.confirm('Are you sure')) destroy_sign(props.sign_id)}}> Destroy</span>
               </Button>
             </CardActions>
           </Card>
