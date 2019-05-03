@@ -10,13 +10,14 @@ Rails.application.routes.draw do
     post '/api/users/auth/facebook/:name/:email', to: 'users#facebookAuth'
     post '/api/users/auth/google/:name/:email', to: 'users#facebookAuth'
   end
-  
+
   get '/api/signs', to: 'signs#index'
   constraints(lat: /[^\/]+/, lng: /[^\/]+/) do
     post '/api/signs', to: 'signs#create'
   end
   post 'api/signs/update', to: 'signs#update'
-
+  post 'api/signs/delete/:id', to: 'signs#delete'
+  
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do
     !request.xhr? && request.format.html?
   end

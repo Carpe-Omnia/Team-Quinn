@@ -18,7 +18,22 @@ const styles = {
   media: {height: 0,paddingTop: '56.25%',},
 };
 */
-
+function destroy_sign(sign_id){
+  let url = `api/signs/delete/${sign_id}`
+  fetch(url, {method: 'POST'})
+  .then(res => res.json())
+  .then(function(json){
+    console.log(json);
+    if (json.message === "sign destroyed"){
+      document.getElementById('snackbar_success_message').innerHTML = 'sign destroyed' ;
+      document.getElementById('show_snackbar_success').click() ;
+      document.getElementsByClassName('gm-ui-hover-effect')[0].click() ;
+      //the line above this is almost guaranteed to be a source of bugs in the future.
+      //keep a close eye on it.
+      document.getElementById('reload_signs_button').click() ;
+    }
+  })
+}
 function edit_form(name, address, status, sign_id){
   return(
     `<form>
@@ -47,7 +62,6 @@ const InfoWindow = (props) => {
 
   let send_lat = props.sign_lat ;
   let send_lng = props.sign_lng ;
-  //let send_address = props.address ;
   function update_sign(){
     let url = `api/signs/update` ;
     let status_select = document.getElementById(`sign_${props.sign_id}_status`) ;
@@ -88,7 +102,7 @@ const InfoWindow = (props) => {
       let send_address = document.getElementById(`sign_${props.sign_id}_address`).value ;
       if(send_address !== props.address) {
         console.log("send_address !== prop address")
-        var address = `${send_address}, Princeton` ;
+        var address = `${send_address}` ;
         actualGeo.geocode( { 'address': address}, function(results, status) {
           if (status === 'OK') {
             send_lat = results[0].geometry.location.lat() ;
@@ -112,7 +126,7 @@ const InfoWindow = (props) => {
     return (
       <div>
         <MuiThemeProvider theme={theme} >
-          <Card className="card" id={`card_for_sign_${props.sign_id}`}>
+          <Card className="card" id={`card_for_sign_${props.sign_id}`} raised={false}>
             {/*<CardMedia
               className="card-media"
               image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Bosphorus.jpg/397px-Bosphorus.jpg"
@@ -134,8 +148,8 @@ const InfoWindow = (props) => {
                 <span onClick={event => make_update_form(event)} id={`make_update_form_for_sign_${props.sign_id}`}> Edit </span>
                 <span style={{display: "none"}} id={`update_button_for_sign_${props.sign_id}`}> Update </span>
               </Button>
-              <Button size="small" color="secondary">
-                Destroy (upcoming)
+              <Button size="small" color="secondary" >
+                <span onClick={event => destroy_sign(props.sign_id)}> Destroy (beta) </span>
               </Button>
             </CardActions>
           </Card>

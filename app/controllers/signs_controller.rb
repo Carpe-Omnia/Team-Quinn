@@ -35,6 +35,22 @@ class SignsController < ApplicationController
       data: {sign: sign}
     }, status: :ok
   end
+  def delete
+    sign = Sign.find_by(id: params[:id])
+    if !!sign
+      sign.destroy()
+      render json: {
+        status: "success",
+        message: "sign destroyed"
+      }, status: :ok
+    else
+      render json: {
+        status: "failure",
+        message: "sign not found"
+      }, status: :ok
+    end
+  end
+
   private
 
   def sign_params
